@@ -10,7 +10,7 @@
       <hr />
 
       <!-- Login Form -->
-      <vue-form :state="formState" @submit.prevent="enviar()">
+      <vue-form :state="formState" @submit.prevent="registrarUsuario()">
         <!-- input nombre y apellido -->
         <validate tag="div">
           <input
@@ -19,6 +19,7 @@
             class="fadeIn second mt-4"
             name="login"
             placeholder="Nombre y Apellido"
+            v-model.trim="formData.nombre"
           />
 
           <!-- Mensajes de validacion -->
@@ -28,10 +29,11 @@
         <validate tag="div">
           <input
             type="text"
-            id="login"
+            id="Email"
             class="fadeIn second mt-4"
-            name="login"
+            name="Email"
             placeholder="Email"
+            v-model.trim="formData.email"
           />
           <!-- Mensajes de validacion -->
           <field-messages name="login" show="$dirty"> </field-messages>
@@ -39,15 +41,19 @@
         <!-- input password-->
         <validate tag="div">
           <input
-            type="text"
+            type="password"
             id="password"
             class="fadeIn third mt-4"
             name="login"
             placeholder="Contraseña"
+            v-model.trim="formData.password"
           />
           <!-- Mensajes de validacion -->
           <field-messages name="login" show="$dirty"> </field-messages>
         </validate>
+        <p :style="colorRegistro(this.mensajeRegistro)">
+          {{ this.mensajeRegistro }}
+        </p>
         <button
           type="submit"
           class="fadeIn fourth mt-4 registrate"
@@ -74,15 +80,42 @@ export default {
     return {
       formData: this.getInicialData(),
       formState: {},
+      mensajeRegistro: "",
     };
   },
   methods: {
     getInicialData() {
       return {
         nombre: "",
-        apellido: "",
-        edad: "",
         email: "",
+        password: "",
+      };
+    },
+    async registrarUsuario() {
+      let usuarioNuevo = {
+        nombre: this.formData.nombre,
+        email: this.formData.email,
+        password: this.formData.password,
+      };
+      try {
+        await this.axios.post(this.$store.state.urlRegistro, usuarioNuevo, {
+          "content-type": "application/json",
+        });
+        this.mensajeRegistro = "Registro exitoso";
+      } catch (error) {
+        this.mensajeRegistro = error.response.data;
+        console.error("Error Axios", error.response.data);
+      }
+
+      this.reset();
+    },
+    reset() {
+      console.log("entro aca");
+      this.formData = this.getInicialData();
+    },
+    colorRegistro(mensaje) {
+      return {
+        color: mensaje == "Registro exitoso" ? "green" : "red",
       };
     },
   },
@@ -256,7 +289,8 @@ input[type="reset"]:active {
   transform: scale(0.95);
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="password"] {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
@@ -277,12 +311,14 @@ input[type="text"] {
   border-radius: 5px 5px 5px 5px;
 }
 
-input[type="text"]:focus {
+input[type="text"]:focus,
+input[type="password"] :focus {
   background-color: #fff;
   border-bottom: 2px solid #f90716;
 }
 
-input[type="text"]:placeholder {
+input[type="text"]:placeholder,
+input[type="password"] :placeholder {
   color: #cccccc;
 }
 

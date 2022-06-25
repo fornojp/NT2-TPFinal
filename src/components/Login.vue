@@ -4,7 +4,7 @@
       <!-- Tabs Titles -->
 
       <!-- Login Form -->
-      <vue-form :state="formState" @submit.prevent="enviar()">
+      <vue-form :state="formState" @submit.prevent="loginUsuario()">
         <!-- input email -->
         <validate tag="div">
           <input
@@ -13,6 +13,7 @@
             class="fadeIn second mt-4"
             name="login"
             placeholder="Email"
+            v-model.trim="formData.email"
           />
           <!-- Mensajes de validacion -->
           <field-messages name="login" show="$dirty"> </field-messages>
@@ -20,11 +21,12 @@
         <!-- input password-->
         <validate tag="div">
           <input
-            type="text"
+            type="password"
             id="password"
             class="fadeIn third mt-4"
             name="login"
             placeholder="Contraseña"
+            v-model.trim="formData.password"
           />
           <!-- Mensajes de validacion -->
           <field-messages name="login" show="$dirty"> </field-messages>
@@ -69,11 +71,37 @@ export default {
   methods: {
     getInicialData() {
       return {
-        nombre: "",
-        apellido: "",
-        edad: "",
         email: "",
+        password: "",
       };
+    },
+    async loginUsuario() {
+      let usuarioRegistrado = {
+        email: this.formData.email,
+        password: this.formData.password,
+      };
+      try {
+        let { data } = await this.axios.post(
+          this.$store.state.urlLogin,
+          usuarioRegistrado,
+          {
+            "content-type": "application/json",
+          }
+        );
+        this.$store.state.usuario.nombre = data.user.nombre;
+        this.$store.state.usuario.token = data.token;
+        this.$store.state.usuario.email = data.user.email;
+        this.$store.state.usuario.rol = data.user.rol;
+
+        console.log(this.$store.state.usuario);
+      } catch (error) {
+        this.mensajeRegistro = error.response.data;
+        console.error("Error Axios", error.response.data);
+      }
+
+      this.$router.push({
+        path: "/navigator",
+      });
     },
   },
   computed: {},
@@ -250,7 +278,8 @@ input[type="reset"]:active {
   transform: scale(0.95);
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="password"] {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
@@ -271,12 +300,14 @@ input[type="text"] {
   border-radius: 5px 5px 5px 5px;
 }
 
-input[type="text"]:focus {
+input[type="text"]:focus,
+input[type="password"]:focus {
   background-color: #fff;
   border-bottom: 2px solid #f90716;
 }
 
-input[type="text"]:placeholder {
+input[type="text"]:placeholder,
+input[type="password"]:placeholder {
   color: #cccccc;
 }
 

@@ -19,7 +19,7 @@
           </li>
         </ul>
       </div>
-      <div class="divBtn">
+      <div class="divBtn" v-if="this.$store.state.usuario.nombre == ''">
         <div class="">
           <button class="botonIniciar">
             <router-link to="/login">
@@ -35,6 +35,28 @@
           </button>
         </div>
       </div>
+      <div v-else>
+        <div class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Hola {{ this.$store.state.usuario.nombre }}
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div v-if="this.$store.state.usuario.rol == 'administrador'">
+              <a class="dropdown-item" href="#">Administrar Propiedades</a>
+              <a class="dropdown-item" href="#">Administrar Usuarios</a>
+            </div>
+            <a class="dropdown-item" href="#" @click="cerrarSession()"
+              >Cerrar Session</a
+            >
+          </div>
+        </div>
+      </div>
     </nav>
   </section>
 </template>
@@ -47,7 +69,14 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    cerrarSession() {
+      this.$store.state.usuario.nombre = "";
+      this.$store.state.usuario.token = "";
+      this.$store.state.usuario.email = "";
+      this.$store.state.usuario.rol = "";
+    },
+  },
   computed: {},
 };
 </script>
