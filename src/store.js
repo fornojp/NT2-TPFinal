@@ -7,7 +7,7 @@ export default new Vuex.Store({
   state: {
     urlRegistro: "http://localhost:3000/usuarios/",
     urlLogin: "http://localhost:3000/usuarios/login",
-    //
+
     usuarios: [],
 
     usuario: {
@@ -32,11 +32,11 @@ export default new Vuex.Store({
     async deleteUsuario({ commit }, id) {
       await axios
         .delete(this.state.urlRegistro + id)
-        .then(({ data }) => {
-          commit("deleteUsuarioM", data);
+        .then(() => {
+          commit("deleteUsuarioM", id);
         })
         .catch((err) => {
-          console.log(err);
+          console.log("error delete", err);
         });
     },
   },
@@ -47,8 +47,10 @@ export default new Vuex.Store({
       //console.warn(usuarios)
     },
     deleteUsuarioM(state, data) {
-      let index = state.usuarios.findIndex((usuario) => usuario.id == data.id);
+      let index = state.usuarios.findIndex((usuario) => usuario._id == data);
+
       if (index == -1) throw new Error("Usuario no encontrado");
+
       state.usuarios.splice(index, 1);
     },
   },

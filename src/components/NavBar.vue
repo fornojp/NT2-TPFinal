@@ -1,6 +1,17 @@
 <template>
-  <section class="">
+  <div class="divPrincipal">
     <nav class="navbar navbar-expand-lg navbar-light fondo">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item active">
@@ -19,6 +30,8 @@
           </li>
         </ul>
       </div>
+    </nav>
+    <div class="divInicioyRegistro">
       <div class="divBtn" v-if="this.$store.state.usuario.nombre == ''">
         <div class="">
           <button class="botonIniciar">
@@ -35,7 +48,7 @@
           </button>
         </div>
       </div>
-      <div v-else class="mr-4">
+      <div v-else class="mr-5">
         <div class="btn-group">
           <button class="btn botonIniciar" data-toggle="dropdown">
             ¡ Hola {{ this.$store.state.usuario.nombre }} !
@@ -46,12 +59,12 @@
             data-toggle="dropdown"
             aria-expanded="false"
           ></button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <div class="dropdown-menu mr-5" aria-labelledby="dropdownMenuButton">
             <div v-if="this.$store.state.usuario.rol == 'administrador'">
               <a class="dropdown-item" href="#">Administrar Propiedades</a>
               <router-link to="/admusuarios">
-              <a class="dropdown-item" href="#">Administrar Usuarios</a>
-            </router-link>
+                <a class="dropdown-item" href="#">Administrar Usuarios</a>
+              </router-link>
             </div>
             <a class="dropdown-item" href="#" @click="cerrarSession()"
               >Cerrar Session</a
@@ -59,8 +72,8 @@
           </div>
         </div>
       </div>
-    </nav>
-  </section>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -87,6 +100,15 @@ export default {
 .fondo {
   background-color: rgb(241, 241, 241);
   border-bottom: solid 4px black;
+  width: 50vw;
+}
+.divInicioyRegistro {
+  display: flex;
+  align-items: center;
+  background-color: rgb(241, 241, 241);
+  border-bottom: solid 4px black;
+  width: 50vw;
+  justify-content: end;
 }
 a {
   text-decoration: none;
@@ -127,5 +149,9 @@ a {
 .divBtn {
   display: flex;
   margin-right: 40px;
+}
+.divPrincipal {
+  display: flex;
+  width: 100%;
 }
 </style>

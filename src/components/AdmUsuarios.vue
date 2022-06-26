@@ -1,10 +1,8 @@
 <template>
   <section class="src-components-adm-usuarios">
     <NavBar />
-    <div class="container">
+    <div class="container mt-4 jumbotron">
       <h1>Administrar Usuarios</h1>
-      <hr />
-      <hr />
       <br />
       <div v-if="this.$store.state.usuarios.length" class="table-responsive">
         <table class="table table-dark">
@@ -24,17 +22,25 @@
             <td>
               <div class="form-group">
                 <select class="form-control" id="admUsuarios">
-                  <option selected>{{ usuario.rol}}</option>
-                  <option>{{usuario.rol == "usuario" ? "administrador" : "usuario"}}</option>
+                  <option selected>{{ usuario.rol }}</option>
+                  <option>
+                    {{ usuario.rol == "usuario" ? "administrador" : "usuario" }}
+                  </option>
                 </select>
               </div>
             </td>
             <td class="centrarBoton">
-              <button class="btn btn-success mr-4" @click="actualizarUsuario(usuario._id)">
+              <button
+                class="btn btn-success mr-4"
+                @click="actualizarUsuario(usuario._id)"
+              >
                 ACTUALIZAR
               </button>
-            
-              <button class="btn btn-danger" @click="deleteUsuario(usuario._id)">
+
+              <button
+                class="btn btn-danger"
+                @click="deleteUsuario(usuario._id)"
+              >
                 BORRAR
               </button>
             </td>
@@ -67,7 +73,7 @@
     },
     data () {
       return {
-        
+
       }
     },
     methods: {
@@ -82,8 +88,13 @@
 </script>
 
 <style scoped lang="css">
-.centrarBoton{
+.centrarBoton {
   display: flex;
   justify-content: center;
+}
+.jumbotron {
+  text-align: center;
+  background-color: #e2e2e2;
+  border-radius: 10px;
 }
 </style>
