@@ -98,7 +98,6 @@ export default {
         this.mensajeRegistro = error.response.data;
         console.error("Error Axios", error.response.data);
       }
-
       this.$router.push({
         path: "/navigator",
       });

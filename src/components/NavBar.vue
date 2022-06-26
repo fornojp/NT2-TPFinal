@@ -4,18 +4,18 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item active">
-            <a class="nav-link text-dark mr-4" href="#"
+            <a class="nav-link text-dark mr-4 efectoHover" href="#"
               >Tasación <span class="sr-only">(current)</span></a
             >
           </li>
           <li class="nav-item mr-4">
-            <a class="nav-link text-dark" href="#">Alquiler</a>
+            <a class="nav-link text-dark efectoHover" href="#">Alquiler</a>
           </li>
           <li class="nav-item mr-4">
-            <a class="nav-link text-dark" href="#">Venta</a>
+            <a class="nav-link text-dark efectoHover" href="#">Venta</a>
           </li>
           <li class="nav-item mr-4">
-            <a class="nav-link text-dark" href="#">Nosotros</a>
+            <a class="nav-link text-dark efectoHover" href="#">Nosotros</a>
           </li>
         </ul>
       </div>
@@ -35,17 +35,17 @@
           </button>
         </div>
       </div>
-      <div v-else>
-        <div class="dropdown">
+      <div v-else class="mr-4">
+        <div class="btn-group">
+          <button class="btn botonIniciar" data-toggle="dropdown">
+            ¡ Hola {{ this.$store.state.usuario.nombre }} !
+          </button>
           <button
-            class="btn btn-secondary dropdown-toggle"
             type="button"
-            id="dropdownMenuButton"
+            class="btn botonIniciar dropdown-toggle dropdown-toggle-split"
             data-toggle="dropdown"
             aria-expanded="false"
-          >
-            Hola {{ this.$store.state.usuario.nombre }}
-          </button>
+          ></button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <div v-if="this.$store.state.usuario.rol == 'administrador'">
               <a class="dropdown-item" href="#">Administrar Propiedades</a>
@@ -89,7 +89,7 @@ export default {
 a {
   text-decoration: none;
 }
-a:hover {
+.efectoHover:hover {
   font-size: 18px;
 }
 
