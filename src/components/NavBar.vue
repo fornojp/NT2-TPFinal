@@ -61,13 +61,15 @@
           ></button>
           <div class="dropdown-menu mr-5" aria-labelledby="dropdownMenuButton">
             <div v-if="this.$store.state.usuario.rol == 'administrador'">
-              <a class="dropdown-item" href="#">Administrar Propiedades</a>
+              <router-link to="/admpropiedades">
+                <a class="dropdown-item" href="#">Administrar Propiedades</a>
+              </router-link>
               <router-link to="/admusuarios">
                 <a class="dropdown-item" href="#">Administrar Usuarios</a>
               </router-link>
             </div>
-            <a class="dropdown-item" href="#" @click="cerrarSession()"
-              >Cerrar Session</a
+            <a class="dropdown-item" href="#" @click="cerrarSesion()"
+              >Cerrar Sesión</a
             >
           </div>
         </div>
@@ -85,7 +87,7 @@ export default {
     return {};
   },
   methods: {
-    cerrarSession() {
+    cerrarSesion() {
       this.$store.state.usuario.nombre = "";
       this.$store.state.usuario.token = "";
       this.$store.state.usuario.email = "";

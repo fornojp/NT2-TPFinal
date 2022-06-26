@@ -7,9 +7,10 @@ export default new Vuex.Store({
   state: {
     urlRegistro: "http://localhost:3000/usuarios/",
     urlLogin: "http://localhost:3000/usuarios/login",
+    urlPropiedades: "http://localhost:3000/propiedades/",
 
     usuarios: [],
-
+    propiedades: [],
     usuario: {
       nombre: "",
       token: "",
@@ -29,11 +30,31 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
+    async getPropiedades({ commit }) {
+      await axios
+        .get(this.state.urlPropiedades)
+        .then(({ data }) => {
+          commit("getPropiedades", data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     async deleteUsuario({ commit }, id) {
       await axios
         .delete(this.state.urlRegistro + id)
         .then(() => {
           commit("deleteUsuarioM", id);
+        })
+        .catch((err) => {
+          console.log("error delete", err);
+        });
+    },
+    async deletePropiedad({ commit }, id) {
+      await axios
+        .delete(this.state.urlPropiedades + id)
+        .then(() => {
+          commit("deletePropiedadM", id);
         })
         .catch((err) => {
           console.log("error delete", err);
@@ -46,12 +67,25 @@ export default new Vuex.Store({
       state.usuarios = data;
       //console.warn(usuarios)
     },
+    getPropiedades(state, data) {
+      state.propiedades = data;
+    },
+
     deleteUsuarioM(state, data) {
       let index = state.usuarios.findIndex((usuario) => usuario._id == data);
 
       if (index == -1) throw new Error("Usuario no encontrado");
 
       state.usuarios.splice(index, 1);
+    },
+    deletePropiedadM(state, data) {
+      let index = state.propiedades.findIndex(
+        (propiedad) => propiedad._id == data
+      );
+
+      if (index == -1) throw new Error("Propiedad no encontrado");
+
+      state.propiedades.splice(index, 1);
     },
   },
 });

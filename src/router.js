@@ -16,7 +16,7 @@ export const router = new VueRouter({
     { path: "/navigator", component: Navigator },
     { path: "/registro", component: Registro },
     { path: "/admusuarios", component: AdmUsuarios },
-    { path: "/admupropiedades", component: AdmPropiedades },
+    { path: "/admpropiedades", component: AdmPropiedades },
     { path: "/", redirect: "/navigator" },
   ],
 });

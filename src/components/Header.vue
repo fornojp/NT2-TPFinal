@@ -2,7 +2,12 @@
   <section class="src-components-header">
     <div class="divHeader">
       <div class="divImagen">
-        <img src="../assets/logoinmobiliariaTp2.svg" alt="" />
+        <img
+          src="../assets/logoinmobiliariaTp2.svg"
+          alt=""
+          @click="redirigir()"
+          class="redirigir"
+        />
       </div>
     </div>
   </section>
@@ -17,7 +22,13 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    redirigir() {
+      this.$router.push({
+        path: "/navigator",
+      });
+    },
+  },
   computed: {},
 };
 </script>
@@ -40,5 +51,8 @@ export default {
   width: 280px;
   padding: 10px;
   align-content: center;
+}
+.redirigir {
+  cursor: pointer;
 }
 </style>
