@@ -106,7 +106,13 @@ export default {
         this.mensajeRegistro = error.response.data;
         console.error("Error Axios", error.response.data);
       }
-
+      if (this.mensajeRegistro == "Registro exitoso") {
+        setTimeout(() => {
+          this.$router.push({
+            path: "/login",
+          });
+        }, 2000);
+      }
       this.reset();
     },
     reset() {

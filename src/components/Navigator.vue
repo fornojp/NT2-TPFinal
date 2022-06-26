@@ -27,7 +27,7 @@
                 </div>
                 <div class="carousel-item">
                   <img
-                    src="../assets/images/img3.jpg"
+                    src="https://static.tokkobroker.com/pictures/12171328644189530396528102767768385944923149659078043480198007601451141752883.jpg"
                     class="d-block w-100"
                     alt="..."
                   />
