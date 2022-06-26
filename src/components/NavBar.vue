@@ -49,7 +49,9 @@
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <div v-if="this.$store.state.usuario.rol == 'administrador'">
               <a class="dropdown-item" href="#">Administrar Propiedades</a>
+              <router-link to="/admusuarios">
               <a class="dropdown-item" href="#">Administrar Usuarios</a>
+            </router-link>
             </div>
             <a class="dropdown-item" href="#" @click="cerrarSession()"
               >Cerrar Session</a
