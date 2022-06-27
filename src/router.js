@@ -8,6 +8,7 @@ import Navigator from "./components/Navigator.vue";
 import Registro from "./components/Registro.vue";
 import AdmUsuarios from "./components/AdmUsuarios";
 import AdmPropiedades from "./components/AdmPropiedades";
+import ActPropiedades from "./components/ActPropiedades";
 
 export const router = new VueRouter({
   mode: "history",
@@ -17,6 +18,7 @@ export const router = new VueRouter({
     { path: "/registro", component: Registro },
     { path: "/admusuarios", component: AdmUsuarios },
     { path: "/admpropiedades", component: AdmPropiedades },
+    { path: "/actpropiedades", component: ActPropiedades },
     { path: "/", redirect: "/navigator" },
   ],
 });

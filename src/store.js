@@ -11,6 +11,7 @@ export default new Vuex.Store({
 
     usuarios: [],
     propiedades: [],
+    propiedadActualizar: "",
     usuario: {
       nombre: "",
       token: "",
@@ -51,10 +52,23 @@ export default new Vuex.Store({
         });
     },
     async deletePropiedad({ commit }, id) {
+      let headers = { authorization: this.state.usuario.token };
       await axios
-        .delete(this.state.urlPropiedades + id)
+        .delete(this.state.urlPropiedades + id, { headers: headers })
         .then(() => {
           commit("deletePropiedadM", id);
+        })
+        .catch((err) => {
+          console.log("error delete", err);
+        });
+    },
+    async actualizarPropiedad({ commit }, nuevaPropiedad) {
+      console.log({ authorization: this.state.usuario.token });
+      let headers = { authorization: this.state.usuario.token };
+      await axios
+        .put(this.state.urlPropiedades, nuevaPropiedad, { headers: headers })
+        .then(() => {
+          commit("actualizarPropiedad");
         })
         .catch((err) => {
           console.log("error delete", err);
@@ -87,5 +101,6 @@ export default new Vuex.Store({
 
       state.propiedades.splice(index, 1);
     },
+    actualizarPropiedad() {},
   },
 });

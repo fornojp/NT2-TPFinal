@@ -37,7 +37,8 @@
                     />
                   </svg>
 
-                  {{ propiedad.domicilio }} - {{ propiedad.barrio }}
+                  {{ propiedad.domicilio }} -
+                  {{ propiedad.barrio }}
                 </button>
                 <div>
                   <button
@@ -46,7 +47,9 @@
                   >
                     Borrar
                   </button>
-                  <button class="btn btn-secondary">Actualizar</button>
+                  <button class="btn btn-secondary" @click="editar(propiedad)">
+                    Actualizar
+                  </button>
                 </div>
               </div>
             </div>
@@ -63,8 +66,7 @@
                 <p>Antiguedad: {{ propiedad.antiguedad }}</p>
                 <p>Condición: {{ propiedad.condición }}</p>
                 <p>Descripcion: {{ propiedad.descripcion }}</p>
-                <p>Moneda: {{ propiedad.moneda }}</p>
-                <p>Precio: {{ propiedad.moneda }}</p>
+                <p>Precio: {{ propiedad.precio }}</p>
               </div>
             </div>
           </div>
@@ -76,6 +78,7 @@
 
 <script>
 import NavBar from "./NavBar.vue";
+
 export default {
   name: "src-components-administrar-propiedades",
   props: [],
@@ -83,6 +86,7 @@ export default {
     NavBar,
   },
   mounted() {
+    // console.log(this.$store.state.propiedades);
     if (this.$store.state.usuario.rol == "administrador") {
       this.$store.dispatch("getPropiedades");
     } else {
@@ -98,7 +102,16 @@ export default {
     deletePropiedad(id) {
       this.$store.dispatch("deletePropiedad", id);
     },
+    editar(propiedad) {
+      // console.log(propiedad);
+      this.$store.state.propiedadActualizar = propiedad;
+      console.log(this.$store.state.propiedadActualizar);
+      this.$router.push({
+        path: "/actpropiedades",
+      });
+    },
   },
+
   computed: {},
 };
 </script>
