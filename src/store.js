@@ -51,6 +51,21 @@ export default new Vuex.Store({
           console.log("error delete", err);
         });
     },
+    async actualizarRol({ commit }, nuevoUsuario) {
+      console.log("desde store", nuevoUsuario, commit);
+      await axios
+        .put(this.state.urlRegistro, nuevoUsuario)
+        .then(() => {
+          commit("actualizarRolM", nuevoUsuario);
+        })
+        .catch((err) => {
+          console.log("error actualizar", err);
+        });
+    },
+    async enableActualizar({ commit }, usuario) {
+      console.log("desde store", usuario, commit);
+      commit("enableActualizarM", usuario);
+    },
     async deletePropiedad({ commit }, id) {
       let headers = { authorization: this.state.usuario.token };
       await axios
@@ -78,11 +93,29 @@ export default new Vuex.Store({
   mutations: {
     //esto
     getUsuariosM(state, data) {
-      state.usuarios = data;
-      //console.warn(usuarios)
+      let data2 = data.map((e) => ({ ...e, isDisabled: true }));
+      state.usuarios = data2;
+      console.warn(state.usuarios);
     },
     getPropiedades(state, data) {
       state.propiedades = data;
+    },
+    actualizarRolM(state, data) {
+      let index = state.usuarios.findIndex(
+        (usuario) => usuario._id == data._id
+      );
+      data.isDisabled = true;
+      state.usuarios[index] = data;
+      //console.warn(data)
+      //console.warn(state.usuarios[index])
+    },
+    enableActualizarM(state, data) {
+      let index = state.usuarios.findIndex(
+        (usuario) => usuario._id == data._id
+      );
+      state.usuarios[index] = data;
+      console.warn(state.usuarios[index].isDisabled);
+      //console.warn(state.usuarios[index])
     },
 
     deleteUsuarioM(state, data) {

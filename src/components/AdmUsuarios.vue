@@ -21,25 +21,36 @@
             <td>{{ usuario.email }}</td>
             <td>
               <div class="form-group">
-                <select class="form-control" id="admUsuarios">
-                  <option selected>{{ usuario.rol }}</option>
-                  <option>
-                    {{ usuario.rol == "usuario" ? "administrador" : "usuario" }}
-                  </option>
-                </select>
+                <vue-form :state="formState" @submit.prevent="actualizarRol()">
+                  <validate tag="div">
+                    <select
+                      class="form-control"
+                      id="admUsuarios"
+                      @change="cambiarRol($event, usuario)"
+                    >
+                      <option selected>{{ usuario.rol }}</option>
+                      <option>
+                        {{
+                          usuario.rol == "usuario" ? "administrador" : "usuario"
+                        }}
+                      </option>
+                    </select>
+                  </validate>
+                </vue-form>
               </div>
             </td>
             <td class="centrarBoton">
               <button
                 class="btn btn-success mr-4"
-                @click="actualizarUsuario(usuario._id)"
+                type="submit"
+                :disabled="usuario.isDisabled"
+                v-on:click="actualizarRol(usuario, nuevoRol)"
               >
                 ACTUALIZAR
               </button>
-
               <button
                 class="btn btn-danger"
-                @click="deleteUsuario(usuario._id)"
+                @click="deleteUsuario(usuario._id, usuario.nombre)"
               >
                 BORRAR
               </button>
@@ -73,12 +84,40 @@
     },
     data () {
       return {
-
+        nuevoRol: "",
+        isDisabled : true,
+        formData: this.getInicialData(),
+        formState: {},
       }
     },
     methods: {
-      deleteUsuario(id) {
+      getInicialData() {
+      return {
+        nuevoRol: "",
+      }
+      },
+      deleteUsuario(id, nombre) {
+        if(confirm('¿Esta seguro que desea borrar al usuario ' + nombre + ' ?'))
         this.$store.dispatch("deleteUsuario", id);
+      },
+      actualizarRol(usuario, nuevoRol){
+        let nuevoUsuario = {
+             "_id" : usuario._id,
+             "nombre" : usuario.nombre,
+             "email" : usuario.email,
+            "password" : usuario.password,
+            "rol" : nuevoRol,
+           }
+        this.$store.dispatch("actualizarRol", nuevoUsuario)
+        console.log("desde adm", nuevoRol)
+      },
+      cambiarRol(select, usuario) {
+        usuario.isDisabled = false;
+        this.$store.dispatch("enableActualizar", usuario)
+        //usuario.isDisabled = nuevoRol2 == usuario.rol
+        console.log(usuario.rol)
+        this.nuevoRol = select.target.value
+        console.warn(select.target.value, this.nuevoRol)
       }
     },
     computed: {
