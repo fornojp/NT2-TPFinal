@@ -23,8 +23,9 @@ export default new Vuex.Store({
   actions: {
     //esto
     async getUsuarios({ commit }) {
+      let headers = { authorization: this.state.usuario.token };
       await axios
-        .get(this.state.urlRegistro)
+        .get(this.state.urlRegistro, { headers: headers })
         .then(({ data }) => {
           commit("getUsuariosM", data);
         })
@@ -53,8 +54,9 @@ export default new Vuex.Store({
         });
     },
     async deleteUsuario({ commit }, id) {
+      let headers = { authorization: this.state.usuario.token };
       await axios
-        .delete(this.state.urlRegistro + id)
+        .delete(this.state.urlRegistro + id, { headers: headers })
         .then(() => {
           commit("deleteUsuarioM", id);
         })
@@ -64,8 +66,9 @@ export default new Vuex.Store({
     },
     async actualizarRol({ commit }, nuevoUsuario) {
       console.log("desde store", nuevoUsuario, commit);
+      let headers = { authorization: this.state.usuario.token };
       await axios
-        .put(this.state.urlRegistro, nuevoUsuario)
+        .put(this.state.urlRegistro, nuevoUsuario, { headers: headers })
         .then(() => {
           commit("actualizarRolM", nuevoUsuario);
         })
