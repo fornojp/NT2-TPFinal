@@ -3,6 +3,9 @@
     <NavBar />
     <div class="jumbotron container">
       <h2>Administrador de Propiedades</h2>
+      <h5 class="alert alert-primary">
+        Se encontraron {{ this.$store.state.propiedades.length }} Propiedad.
+      </h5>
       <hr />
       <br />
       <div
@@ -10,7 +13,7 @@
         :key="index"
       >
         <div class="accordion" id="accordionExample">
-          <div class="card mt-4">
+          <div class="card mt-2">
             <div class="card-header drop" id="headingOne">
               <div class="divAcordeon">
                 <button
@@ -47,8 +50,8 @@
                   >
                     Borrar
                   </button>
-                  <button class="btn btn-secondary" @click="editar(propiedad)">
-                    Actualizar
+                  <button class="btn btn-success" @click="editar(propiedad)">
+                    Editar
                   </button>
                 </div>
               </div>

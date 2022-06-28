@@ -149,7 +149,7 @@
       </validate>
 
       <br />
-
+      <h6>{{ this.mensaje }}</h6>
       <div class="modal-footer">
         <button
           type="submit"
@@ -159,7 +159,12 @@
         >
           Enviar
         </button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          @click="cerrar()"
+        >
           Cerrar
         </button>
       </div>
@@ -176,12 +181,21 @@ export default {
     return {
       formData: this.$store.state.propiedadActualizar,
       formState: {},
+      mensaje: "",
     };
   },
   methods: {
     enviarActualizacion() {
-      // console.log(this.formData);
       this.$store.dispatch("actualizarPropiedad", this.formData);
+      this.mensaje = "Cambios Realizados con Exito";
+      setTimeout(() => {
+        this.cerrar();
+      }, 2000);
+    },
+    cerrar() {
+      this.$router.push({
+        path: "/admpropiedades",
+      });
     },
   },
   computed: {},
@@ -193,5 +207,8 @@ export default {
   background-color: #e2e2e2;
   border-radius: 10px;
   margin-top: 40px;
+}
+h6 {
+  color: green;
 }
 </style>
