@@ -89,7 +89,6 @@ export default {
     NavBar,
   },
   mounted() {
-    // console.log(this.$store.state.propiedades);
     if (this.$store.state.usuario.rol == "administrador") {
       this.$store.dispatch("getPropiedades");
     } else {

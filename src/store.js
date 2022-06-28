@@ -81,7 +81,6 @@ export default new Vuex.Store({
         });
     },
     async actualizarPropiedad({ commit }, nuevaPropiedad) {
-      console.log({ authorization: this.state.usuario.token });
       let headers = { authorization: this.state.usuario.token };
       await axios
         .put(this.state.urlPropiedades, nuevaPropiedad, { headers: headers })

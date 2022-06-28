@@ -1,6 +1,6 @@
 <template>
   <div class="jumbotron container">
-    <vue-form :state="formState" @submit.prevent="enviarActualizacion()">
+    <vue-form :state="formState" @submit.prevent="">
       <validate tag="div">
         <!-- elemento de entrada -->
         <label for="domicilio">Tipo de Propiedad</label>
@@ -135,6 +135,29 @@
         <!-- Mensajes de validacion -->
         <field-messages name="nombre" show="$dirty"> </field-messages>
       </validate>
+
+      <validate tag="div">
+        <label for="precio">Es Destacada</label>
+        <!-- elemento de entrada -->
+        <select
+          class="form-control"
+          id="admUsuarios"
+          @change="cambiarDestacada($event)"
+        >
+          <option selected>
+            {{ formData.esDestacada == true ? "Si" : "No" }}
+            {{ formData.esDestacada }}
+            option 1
+          </option>
+          <option>
+            {{ formData.esDestacada != true ? "Si" : "No" }}
+            option 2
+          </option>
+        </select>
+        <!-- Mensajes de validacion -->
+        <field-messages name="nombre" show="$dirty"> </field-messages>
+      </validate>
+
       <validate tag="div">
         <!-- elemento de entrada -->
         <label for="descripcion">Descripcion</label>
@@ -189,13 +212,26 @@ export default {
       this.$store.dispatch("actualizarPropiedad", this.formData);
       this.mensaje = "Cambios Realizados con Exito";
       setTimeout(() => {
-        this.cerrar();
+        this.$router.push({
+          path: "/admpropiedades",
+        });
       }, 2000);
     },
     cerrar() {
       this.$router.push({
         path: "/admpropiedades",
       });
+    },
+    cambiarDestacada(select) {
+      if (select.target.value == "Si") {
+        console.log("entreo por si");
+        this.formData.esDestacada = true;
+        console.log(this.formData.esDestacada);
+      } else {
+        console.log("entreo por no");
+        this.formData.esDestacada = false;
+        console.log(this.formData.esDestacada);
+      }
     },
   },
   computed: {},
