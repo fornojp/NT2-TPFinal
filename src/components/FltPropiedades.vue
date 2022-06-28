@@ -27,14 +27,25 @@ export default {
     Card,
     NavBar,
   },
-  mounted() {
-    console.log(this.tipo);
-    console.log(this.$store.dispatch("getFltPropiedades", this.tipo));
+  created() {
+    this.get(this.tipo);
+  },
+  beforeUpdate() {
+    if (this.tituloViejo != this.titulo) {
+      this.get(this.tipo);
+      this.tituloViejo = this.titulo;
+    }
   },
   data() {
-    return {};
+    return {
+      tituloViejo: this.titulo,
+    };
   },
-  methods: {},
+  methods: {
+    get(tipo) {
+      this.$store.dispatch("getFltPropiedades", tipo);
+    },
+  },
   computed: {},
 };
 </script>

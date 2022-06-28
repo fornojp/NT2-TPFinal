@@ -117,7 +117,7 @@
         //usuario.isDisabled = nuevoRol2 == usuario.rol
         console.log(usuario.rol)
         this.nuevoRol = select.target.value
-        console.warn(select.target.value, this.nuevoRol)
+        // console.warn(select.target.value, this.nuevoRol)
       }
     },
     computed: {

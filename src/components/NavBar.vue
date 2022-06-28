@@ -97,15 +97,15 @@ export default {
     },
     irAlquiler() {
       this.$router.push({
-        path: "/fltpropiedades",
-        name: "fltpropiedades",
+        path: "/fltpropiedades/tipo",
+        name: "fltpropiedadesalquiler",
         params: { tipo: "filtrar/tipo?tipo=alquiler", titulo: "Alquiler" },
       });
     },
     irVentas() {
       this.$router.push({
-        path: "/fltpropiedades",
-        name: "fltpropiedades",
+        path: "/fltpropiedades/tipo",
+        name: "fltpropiedadesventa",
         params: { tipo: "filtrar/tipo?tipo=venta", titulo: "Venta" },
       });
     },

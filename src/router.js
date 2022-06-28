@@ -25,7 +25,13 @@ export const router = new VueRouter({
       path: "/fltpropiedades/tipo",
       component: FltPropiedades,
       props: true,
-      name: "fltpropiedades",
+      name: "fltpropiedadesalquiler",
+    },
+    {
+      path: "/fltpropiedades/tipo",
+      component: FltPropiedades,
+      props: true,
+      name: "fltpropiedadesventa",
     },
     {
       path: "/detallepropiedad/:id",

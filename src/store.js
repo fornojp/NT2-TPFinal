@@ -64,6 +64,7 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
+
     async deleteUsuario({ commit }, id) {
       let headers = { authorization: this.state.usuario.token };
       await axios
@@ -119,7 +120,7 @@ export default new Vuex.Store({
     getUsuariosM(state, data) {
       let data2 = data.map((e) => ({ ...e, isDisabled: true }));
       state.usuarios = data2;
-      console.warn(state.usuarios);
+      // console.warn(state.usuarios);
     },
     getPropiedades(state, data) {
       state.propiedades = data;
@@ -146,7 +147,7 @@ export default new Vuex.Store({
         (usuario) => usuario._id == data._id
       );
       state.usuarios[index] = data;
-      console.warn(state.usuarios[index].isDisabled);
+      // console.warn(state.usuarios[index].isDisabled);
       //console.warn(state.usuarios[index])
     },
 
