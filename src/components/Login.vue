@@ -1,8 +1,7 @@
 <template>
   <div class="wrapper fadeInDown">
-    <div id="formContent">
+    <div id="formContent" :style="getLoginOk(this.mensajeRegistro)">
       <!-- Tabs Titles -->
-
       <!-- Login Form -->
       <vue-form :state="formState" @submit.prevent="loginUsuario()">
         <!-- input email -->
@@ -30,6 +29,9 @@
           />
           <!-- Mensajes de validacion -->
           <field-messages name="login" show="$dirty"> </field-messages>
+          <p class="mensajeError">
+            {{ this.mensajeRegistro }}
+          </p>
         </validate>
         <button
           type="submit"
@@ -66,6 +68,7 @@ export default {
     return {
       formData: this.getInicialData(),
       formState: {},
+      mensajeRegistro: "",
     };
   },
   methods: {
@@ -92,17 +95,28 @@ export default {
         this.$store.state.usuario.token = data.token;
         this.$store.state.usuario.email = data.user.email;
         this.$store.state.usuario.rol = data.user.rol;
-
-        console.log(this.$store.state.usuario);
+        this.mensajeRegistro = "Registro exitoso";
       } catch (error) {
         this.mensajeRegistro = error.response.data;
         console.error("Error Axios", error.response.data);
       }
-      setTimeout(() => {
-        this.$router.push({
-          path: "/navigator",
-        });
-      }, 2000);
+      if (this.mensajeRegistro == "Registro exitoso") {
+        setTimeout(() => {
+          this.$router.push({
+            path: "/navigator",
+          });
+        }, 2000);
+      }
+    },
+    getLoginOk(mensaje) {
+      return {
+        backgroundColor:
+          mensaje == "Registro exitoso"
+            ? "#6fc182"
+            : mensaje == ""
+            ? "#fff"
+            : "#ff6d76",
+      };
     },
   },
   computed: {},
@@ -137,6 +151,9 @@ h2 {
   width: 100%;
   min-height: 100%;
   padding: 33px;
+}
+.mensajeError {
+  color: #dce8f1;
 }
 
 #formContent {
