@@ -11,6 +11,7 @@ export default new Vuex.Store({
 
     usuarios: [],
     propiedades: [],
+    propiedad: {},
     propiedadActualizar: "",
     usuario: {
       nombre: "",
@@ -36,6 +37,16 @@ export default new Vuex.Store({
         .get(this.state.urlPropiedades)
         .then(({ data }) => {
           commit("getPropiedades", data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    async getPropiedad({ commit }) {
+      await axios
+        .get(this.state.urlPropiedades + '62ba453d8592573e6a8ab1a6')
+        .then(({ data }) => {
+          commit("getPropiedad", data);
         })
         .catch((err) => {
           console.log(err);
@@ -99,6 +110,10 @@ export default new Vuex.Store({
     },
     getPropiedades(state, data) {
       state.propiedades = data;
+    },
+    getPropiedad(state, data) {
+      state.propiedad = data;
+      console.log(state.propiedad);
     },
     actualizarRolM(state, data) {
       let index = state.usuarios.findIndex(
