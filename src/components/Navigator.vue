@@ -141,7 +141,6 @@ export default {
   text-align: center;
   background-color: red;
   color: white;
-  height: 79vh;
 }
 .info div {
   margin: 20px;
