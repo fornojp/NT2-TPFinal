@@ -11,6 +11,7 @@ export default new Vuex.Store({
 
     usuarios: [],
     propiedades: [],
+    propiedadesFiltradas: [],
     propiedad: {},
     propiedadActualizar: "",
     usuario: {
@@ -38,6 +39,16 @@ export default new Vuex.Store({
         .get(this.state.urlPropiedades)
         .then(({ data }) => {
           commit("getPropiedades", data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    async getFltPropiedades({ commit }, filtro) {
+      await axios
+        .get(this.state.urlPropiedades + filtro)
+        .then(({ data }) => {
+          commit("getFilPropiedades", data);
         })
         .catch((err) => {
           console.log(err);
@@ -112,6 +123,11 @@ export default new Vuex.Store({
     },
     getPropiedades(state, data) {
       state.propiedades = data;
+    },
+    getFilPropiedades(state, data) {
+      // console.log(data);
+      state.propiedadesFiltradas = data;
+      // console.log(state.propiedadesFiltradas);
     },
     getPropiedad(state, data) {
       state.propiedad = data;

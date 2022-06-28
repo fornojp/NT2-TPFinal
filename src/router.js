@@ -10,6 +10,7 @@ import AdmUsuarios from "./components/AdmUsuarios";
 import AdmPropiedades from "./components/AdmPropiedades";
 import ActPropiedades from "./components/ActPropiedades";
 import DetallePropiedad from "./components/DetallePropiedad";
+import FltPropiedades from "./components/FltPropiedades";
 
 export const router = new VueRouter({
   mode: "history",
@@ -20,6 +21,12 @@ export const router = new VueRouter({
     { path: "/admusuarios", component: AdmUsuarios },
     { path: "/admpropiedades", component: AdmPropiedades },
     { path: "/actpropiedades", component: ActPropiedades },
+    {
+      path: "/fltpropiedades/tipo",
+      component: FltPropiedades,
+      props: true,
+      name: "fltpropiedades",
+    },
     {
       path: "/detallepropiedad/:id",
       component: DetallePropiedad,

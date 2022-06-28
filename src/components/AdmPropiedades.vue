@@ -45,13 +45,16 @@
                 </button>
                 <div>
                   <button
-                    class="btn btn-danger mr-4"
+                    class="btn btn-success mr-4"
+                    @click="editar(propiedad)"
+                  >
+                    Editar
+                  </button>
+                  <button
+                    class="btn btn-danger"
                     @click="deletePropiedad(propiedad._id)"
                   >
                     Borrar
-                  </button>
-                  <button class="btn btn-success" @click="editar(propiedad)">
-                    Editar
                   </button>
                 </div>
               </div>

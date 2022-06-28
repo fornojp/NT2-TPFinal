@@ -49,6 +49,8 @@
           </div>
           <div class="info">
             <div>
+              <h2>Mas De 2000 Propiedades nos Avalan</h2>
+              <br />
               <p>
                 Con 30 años en el mercado, FOUR GROUP se caracteriza por ser una
                 empresa joven, emprendedora y dinámica. Como Inmobiliaria
@@ -61,13 +63,14 @@
                 brindar solución integral a las necesidades inmobiliarias de
                 personas y familias.
               </p>
+              <br />
               <button type="button" class="btn btn-light btnConoce">
                 Conoce Mas De Nosotros
               </button>
             </div>
           </div>
         </div>
-        <div class="container mt-5 mb-5 text-center divPD">
+        <div class="container mt-5 mb-5 text-center">
           <h2>Propiedades Destacadas</h2>
           <hr />
           <div class="row text-left">
@@ -138,9 +141,11 @@ export default {
   text-align: center;
   background-color: red;
   color: white;
+  height: 79vh;
 }
 .info div {
   margin: 20px;
+  width: 80%;
 }
 .btnConoce {
   color: #7b8294;

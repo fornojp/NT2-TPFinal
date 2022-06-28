@@ -14,19 +14,23 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link text-dark mr-4 efectoHover" href="#"
-              >Tasación <span class="sr-only">(current)</span></a
+          <li class="nav-item mr-4">
+            <button
+              class="nav-link text-dark efectoHover"
+              @click="irAlquiler()"
             >
+              Nuestras Propiedades en Alquiler
+            </button>
           </li>
           <li class="nav-item mr-4">
-            <a class="nav-link text-dark efectoHover" href="#">Alquiler</a>
+            <button class="nav-link text-dark efectoHover" @click="irVentas()">
+              Nuestras Propiedades en Venta
+            </button>
           </li>
           <li class="nav-item mr-4">
-            <a class="nav-link text-dark efectoHover" href="#">Venta</a>
-          </li>
-          <li class="nav-item mr-4">
-            <a class="nav-link text-dark efectoHover" href="#">Nosotros</a>
+            <button class="nav-link text-dark efectoHover" href="#">
+              Nosotros
+            </button>
           </li>
         </ul>
       </div>
@@ -68,9 +72,7 @@
                 <a class="dropdown-item" href="#">Administrar Usuarios</a>
               </router-link>
             </div>
-            <a class="dropdown-item" href="#" @click="cerrarSesion()"
-              >Cerrar Sesión</a
-            >
+            <a class="dropdown-item" @click="cerrarSesion()">Cerrar Sesión</a>
           </div>
         </div>
       </div>
@@ -92,6 +94,20 @@ export default {
       this.$store.state.usuario.token = "";
       this.$store.state.usuario.email = "";
       this.$store.state.usuario.rol = "";
+    },
+    irAlquiler() {
+      this.$router.push({
+        path: "/fltpropiedades",
+        name: "fltpropiedades",
+        params: { tipo: "filtrar/tipo?tipo=alquiler", titulo: "Alquiler" },
+      });
+    },
+    irVentas() {
+      this.$router.push({
+        path: "/fltpropiedades",
+        name: "fltpropiedades",
+        params: { tipo: "filtrar/tipo?tipo=venta", titulo: "Venta" },
+      });
     },
   },
   computed: {},
@@ -155,5 +171,8 @@ a {
 .divPrincipal {
   display: flex;
   width: 100%;
+}
+.nav-link {
+  border: none;
 }
 </style>
