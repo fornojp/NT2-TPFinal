@@ -62,7 +62,7 @@
                   </button>
                   <button
                     class="btn btn-danger"
-                    @click="deletePropiedad(propiedad._id)"
+                    @click="deletePropiedad(propiedad._id, propiedad.domicilio)"
                   >
                     Borrar
                   </button>
@@ -342,8 +342,11 @@ export default {
       this.formData = this.getInicialData(); //reset de los datos del vue-form
       this.formState._reset(); //reseet de los estados vue-form
     },
-    deletePropiedad(id) {
-      this.$store.dispatch("deletePropiedad", id);
+    deletePropiedad(id, nombre) {
+      if (
+        confirm("¿Esta seguro que desea borrar la propiedad " + nombre + " ?")
+      )
+        this.$store.dispatch("deletePropiedad", id);
     },
     editar(propiedad) {
       // console.log(propiedad);

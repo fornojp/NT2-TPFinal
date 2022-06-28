@@ -3,9 +3,13 @@
     <NavBar />
     <div class="container mt-4 jumbotron">
       <h1>Administrar Usuarios</h1>
-      <br />
+      <hr />
+      <h5 class="alert alert-primary">
+        Se encontraron {{ this.$store.state.usuarios.length }} usuarios.
+      </h5>
+      <hr />
       <div v-if="this.$store.state.usuarios.length" class="table-responsive">
-        <table class="table table-dark">
+        <table class="table table-dark tablaUsuario">
           <tr>
             <th>id</th>
             <th>Nombre</th>
@@ -57,9 +61,6 @@
             </td>
           </tr>
         </table>
-        <h5 class="alert alert-primary">
-          Se encontraron {{ this.$store.state.usuarios.length }} usuarios.
-        </h5>
       </div>
     </div>
   </section>
@@ -135,5 +136,8 @@
   text-align: center;
   background-color: #e2e2e2;
   border-radius: 10px;
+}
+.tablaUsuario {
+  background-color: black;
 }
 </style>
