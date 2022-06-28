@@ -20,7 +20,12 @@ export const router = new VueRouter({
     { path: "/admusuarios", component: AdmUsuarios },
     { path: "/admpropiedades", component: AdmPropiedades },
     { path: "/actpropiedades", component: ActPropiedades },
-    { path: "/Detallepropiedad", component: DetallePropiedad },
+    {
+      path: "/detallepropiedad/:id",
+      component: DetallePropiedad,
+      props: true,
+      name: "detallepropiedad",
+    },
     { path: "/", redirect: "/navigator" },
   ],
 });

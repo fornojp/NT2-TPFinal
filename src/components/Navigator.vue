@@ -71,24 +71,12 @@
           <h2>Propiedades Destacadas</h2>
           <hr />
           <div class="row text-left">
-            <!-- <div class="col-4 mt-5" v-for="(card, index) in cards" :key="index">
-            <Card :card="card" />
-          </div> -->
-
-            <div class="col-4 mt-5">
-              <Card />
-            </div>
-            <div class="col-4 mt-5">
-              <Card />
-            </div>
-            <div class="col-4 mt-5">
-              <Card />
-            </div>
-            <div class="col-4 mt-5">
-              <Card />
-            </div>
-            <div class="col-4 mt-5">
-              <Card />
+            <div
+              class="col-4 mt-5"
+              v-for="(propiedad, index) in propDestacadas"
+              :key="index"
+            >
+              <Card :propiedadCard="propiedad" />
             </div>
           </div>
         </div>
@@ -110,14 +98,26 @@ export default {
     NavBar,
   },
   props: [],
+  created() {
+    this.$store.dispatch("getPropiedades");
+  },
   mounted() {},
   data() {
-    return {
-      cards: [],
-    };
+    return {};
   },
   methods: {},
-  computed: {},
+  computed: {
+    propDestacadas() {
+      let propDestacadas = [];
+      this.$store.state.propiedades.map((prop) => {
+        if (prop.esDestacada == true) {
+          propDestacadas.push(prop);
+        }
+      });
+
+      return propDestacadas;
+    },
+  },
 };
 </script>
 

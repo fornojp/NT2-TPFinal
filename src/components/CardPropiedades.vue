@@ -1,16 +1,27 @@
 <template>
   <div class="tamaño">
     <div class="card">
-      <img src="../assets/images/img1.jpg" class="card-img-top" alt="..." />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </p>
-          <router-link to="/DetallePropiedad">
-          <a href="" class="btn btn-danger">Ver más</a>
-            </router-link>
+      <div class="divImg">
+        <img
+          :src="propiedadCard.img[0]"
+          class="card-img-top img-fluid"
+          alt="..."
+        />
+      </div>
+      <div class="card-body divCar">
+        <h5 class="card-title">
+          {{ propiedadCard.domicilio }} - {{ propiedadCard.barrio }}
+        </h5>
+        <p class="card-text">{{ propiedadCard.descripcion }}</p>
+        <div class="divBoton">
+          <button
+            href=""
+            class="btn btn-danger"
+            @click="irDetalle(propiedadCard._id)"
+          >
+            Ver más
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -19,12 +30,20 @@
 <script>
 export default {
   name: "src-components-card-propiedades",
-  props: [],
+  props: ["propiedadCard"],
   mounted() {},
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    irDetalle(id) {
+      this.$router.push({
+        path: "/detallepropiedad",
+        name: "detallepropiedad",
+        params: { id: id },
+      });
+    },
+  },
   computed: {},
 };
 </script>
@@ -40,5 +59,21 @@ export default {
 }
 img {
   border-radius: 20px 20px 0px 0px;
+  max-height: 100%;
+  object-fit: cover;
+}
+.divImg {
+  height: 214px;
+}
+.divCar {
+  height: 260px;
+  display: flex;
+  flex-direction: column;
+}
+.divBoton {
+  display: flex;
+  height: 100%;
+  flex-direction: row;
+  align-items: flex-end;
 }
 </style>

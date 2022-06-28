@@ -145,13 +145,10 @@
           @change="cambiarDestacada($event)"
         >
           <option selected>
-            {{ formData.esDestacada == true ? "Si" : "No" }}
-            {{ formData.esDestacada }}
-            option 1
+            {{ this.esDestacada == true ? "Si" : "No" }}
           </option>
           <option>
-            {{ formData.esDestacada != true ? "Si" : "No" }}
-            option 2
+            {{ this.esDestacada != true ? "Si" : "No" }}
           </option>
         </select>
         <!-- Mensajes de validacion -->
@@ -199,12 +196,15 @@
 export default {
   name: "src-components-act-propiedades",
   props: [],
-  mounted() {},
+  mounted() {
+    this.esDestacada = this.formData.esDestacada;
+  },
   data() {
     return {
       formData: this.$store.state.propiedadActualizar,
       formState: {},
       mensaje: "",
+      esDestacada: "",
     };
   },
   methods: {
@@ -224,13 +224,9 @@ export default {
     },
     cambiarDestacada(select) {
       if (select.target.value == "Si") {
-        console.log("entreo por si");
         this.formData.esDestacada = true;
-        console.log(this.formData.esDestacada);
       } else {
-        console.log("entreo por no");
         this.formData.esDestacada = false;
-        console.log(this.formData.esDestacada);
       }
     },
   },
