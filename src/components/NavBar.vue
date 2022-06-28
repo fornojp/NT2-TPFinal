@@ -19,12 +19,12 @@
               class="nav-link text-dark efectoHover"
               @click="irAlquiler()"
             >
-              Nuestras Propiedades en Alquiler
+              Propiedades en Alquiler
             </button>
           </li>
           <li class="nav-item mr-4">
             <button class="nav-link text-dark efectoHover" @click="irVentas()">
-              Nuestras Propiedades en Venta
+              Propiedades en Venta
             </button>
           </li>
           <li class="nav-item mr-4">
