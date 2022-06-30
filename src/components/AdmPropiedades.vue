@@ -82,7 +82,9 @@
                 <p>Antiguedad: {{ propiedad.antiguedad }}</p>
                 <p>Condición: {{ propiedad.condición }}</p>
                 <p>Descripcion: {{ propiedad.descripcion }}</p>
-                <p>Precio: {{ propiedad.precio }}</p>
+                <p>
+                  Precio: {{ propiedad.precio | convertir(propiedad.moneda) }}
+                </p>
               </div>
             </div>
           </div>
