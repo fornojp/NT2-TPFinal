@@ -55,7 +55,7 @@
       <div v-else class="mr-5">
         <div class="btn-group">
           <button class="btn botonIniciar" data-toggle="dropdown">
-            ¡ Hola {{ this.$store.state.usuario.nombre }} !
+            {{ saludar() }}
           </button>
           <button
             type="button"

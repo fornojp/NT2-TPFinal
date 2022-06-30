@@ -13,6 +13,9 @@ import "./axios";
 
 import store from "./store";
 
+import "./globalFilters";
+import "./mixinGlobal";
+
 Vue.config.productionTip = false;
 
 new Vue({

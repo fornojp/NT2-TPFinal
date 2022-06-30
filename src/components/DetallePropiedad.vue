@@ -81,7 +81,10 @@
               {{ this.$store.state.propiedad.descripcion }}
             </p>
             <h4 class="precio">
-              {{ this.$store.state.propiedad.precio }}
+              {{
+                this.$store.state.propiedad.precio
+                  | convertir(this.$store.state.propiedad.moneda)
+              }}
             </h4>
           </div>
         </div>

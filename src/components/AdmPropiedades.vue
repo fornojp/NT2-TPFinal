@@ -300,13 +300,19 @@ export default {
     }
   },
   updated() {
-    this.$store.dispatch("getPropiedades");
+    if (this.getProp) {
+      this.$store.dispatch("getPropiedades");
+      console.log("entro al update");
+      this.getProp = false;
+      this.mensaje = "";
+    }
   },
   data() {
     return {
       formData: this.getInicialData(),
       formState: {},
       mensaje: "",
+      getProp: false,
     };
   },
   methods: {
@@ -339,6 +345,7 @@ export default {
         console.error("Error Axios", error.response.data);
       }
       this.mensaje = "Casa Agregada exitosamente";
+      this.getProp = true;
       this.formData = this.getInicialData(); //reset de los datos del vue-form
       this.formState._reset(); //reseet de los estados vue-form
     },
